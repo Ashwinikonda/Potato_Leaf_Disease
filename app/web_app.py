@@ -2,6 +2,7 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
+import os
 
 st.set_page_config(
     page_title="Potato Leaf Disease Detection"
@@ -18,7 +19,8 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model():
-    model=tf.keras.models.load_model('potatoes.h5', compile=False)
+    model_path = os.path.join(os.path.dirname(__file__), 'potatoes.h5')
+    model=tf.keras.models.load_model(model_path, compile=False)
     return model
 
 with st.spinner('Model is being loaded..'):
